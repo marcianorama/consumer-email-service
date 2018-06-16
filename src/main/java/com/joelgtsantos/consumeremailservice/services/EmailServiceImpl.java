@@ -3,10 +3,16 @@
  */
 package com.joelgtsantos.consumeremailservice.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.messaging.MessagingException;
 import org.springframework.stereotype.Service;
+
+import com.joelgtsantos.consumeremailservice.domain.Email;
 
 /**
  * @author Joel Santos
@@ -17,14 +23,34 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailServiceImpl implements EmailService {
   
-    @Autowired
-    public JavaMailSender emailSender;
+	private Logger logger = LoggerFactory.getLogger(EmailServiceImpl.class);
+	
+    private final JavaMailSender emailSender;
+    private final ContentBuilderService contentBuilderService;
+    
+    public EmailServiceImpl(JavaMailSender emailSender, ContentBuilderService contentBuilderService) {
+    	this.emailSender = emailSender;
+    	this.contentBuilderService = contentBuilderService;
+    }
  
-    public void sendSimpleMessage(String to, String subject, String text) {
-        SimpleMailMessage message = new SimpleMailMessage(); 
-        message.setTo(to); 
-        message.setSubject(subject); 
-        message.setText(text);
-        emailSender.send(message);
+
+	/* Receive an email bean which will be used to generate an email
+	 * @see com.joelgtsantos.consumeremailservice.services.EmailService#sendSimpleMessage(com.joelgtsantos.consumeremailservice.domain.Email)
+	 */
+    public void sendSimpleMessage(Email email) {
+    	try {
+    		MimeMessagePreparator messagePreparator = mimeMessage -> {
+		        MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+		        messageHelper.setFrom(email.getFrom());
+		        messageHelper.setTo(email.getTo());
+		        messageHelper.setSubject(email.getSubject());
+		        String content = contentBuilderService.build(email);
+		        messageHelper.setText(content, true);
+		    };
+	        emailSender.send(messagePreparator);
+	        
+    	} catch (MessagingException e) {
+    		logger.error("Error occurred sending email", e);
+        }
     }
 }

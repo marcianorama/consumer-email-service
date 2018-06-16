@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>CMS Email</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <style>
+        body {
+            font-family: Helvetica;
+            font-size: 48px;
+        }
+        .email{
+        	align: center;
+        	border: 0;
+        	cellpadding: 0; 
+        	cellspacing:0;
+        	width: 600px;
+        	border-collapse: collapse;
+        }
+        .email-header{
+        	padding: 40px 30px 5px 30px;
+        	color: #404040;
+        }
+        .email-body{
+        	padding: 5px 30px 30px 30px; 
+        	color: #606060;
+        	font-size: 15px;
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0;">
+
+    <table>
+        <tr>
+            <td class="email-header">
+                <h2 th:text="${('Hi '+ email.getName())}">Hi </h2>
+            </td>
+        </tr>
+        <tr>
+            <td class="email-body">
+                <p th:text="${email.getBody()}">body </p>
+                <br/>
+                <p>Regards,</p>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

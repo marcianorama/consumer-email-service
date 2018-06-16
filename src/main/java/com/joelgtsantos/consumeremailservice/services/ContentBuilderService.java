@@ -11,6 +11,7 @@ import com.joelgtsantos.consumeremailservice.domain.Email;
  * consumer-email-service
  * 2018
  */
-public interface EmailService {
-	void sendSimpleMessage(Email email);
+public interface ContentBuilderService {
+
+	public String build(Email email);
 }

@@ -30,6 +30,6 @@ public class ConsumerEmailServiceApplication implements ApplicationRunner {
         //"Sending Simple Email with JavaMailSender Example");
         //EmailService.setContent("This tutorial demonstrates how to send a simple email using Spring Framework.");
 
-        emailService.sendSimpleMessage("joelgtsantos@gmail.com", "subject", "text");
+        //emailService.sendSimpleMessage("joelgtsantos@gmail.com", "subject", "text");
     }
 }
