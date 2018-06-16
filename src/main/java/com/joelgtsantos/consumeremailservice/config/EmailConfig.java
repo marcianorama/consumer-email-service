@@ -39,17 +39,17 @@ public class EmailConfig implements RabbitListenerConfigurer {
 	
 	@Bean
 	public Exchange eventExchange() {
-		return new TopicExchange("eventExchange");
+		return new TopicExchange("cmsExchange");
 	}
 
 	@Bean
 	public Queue queue() {
-		return new Queue("orderServiceQueue");
+		return new Queue("cmsServiceQueue");
 	}
 
 	@Bean
 	public Binding binding(Queue queue, TopicExchange eventExchange) {
-		return BindingBuilder.bind(queue).to(eventExchange).with("customer.*");
+		return BindingBuilder.bind(queue).to(eventExchange).with("user.*");
 	}
 	
 	@Bean

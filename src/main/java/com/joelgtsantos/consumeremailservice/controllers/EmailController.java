@@ -31,7 +31,7 @@ public class EmailController {
 	/* (non-Javadoc)
 	 * @see com.joelgtsantos.consumeremailservice.controllers.EmailController#receiveMessage(com.joelgtsantos.consumeremailservice.domain.Email)
 	 */
-	@RabbitListener(queues = "orderServiceQueue")
+	@RabbitListener(queues = "cmsServiceQueue")
 	public void receiveMessage(@Payload Email email) {
 		logger.info("Received message '{}'", email.getFrom());
 		this.emailService.sendSimpleMessage(email);	 
