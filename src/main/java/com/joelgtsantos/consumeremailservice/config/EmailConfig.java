@@ -20,8 +20,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.handler.annotation.support.DefaultMessageHandlerMethodFactory;
 
-import com.joelgtsantos.consumeremailservice.controllers.EmailController;
-
 
 
 /**
@@ -32,6 +30,8 @@ import com.joelgtsantos.consumeremailservice.controllers.EmailController;
 @Configuration
 @EnableRabbit
 public class EmailConfig implements RabbitListenerConfigurer {
+	
+	static final String queueName = "cmsServiceQueue";
 	
 	@Autowired
 	public ConnectionFactory connectionFactory;
@@ -63,10 +63,4 @@ public class EmailConfig implements RabbitListenerConfigurer {
 	public void configureRabbitListeners(RabbitListenerEndpointRegistrar registrar) {
 		registrar.setMessageHandlerMethodFactory(myHandlerMethodFactory());
 	}
-	
-	@Bean
-	public EmailController eventReceiver() {
-		return new EmailController();
-	}
-
 }

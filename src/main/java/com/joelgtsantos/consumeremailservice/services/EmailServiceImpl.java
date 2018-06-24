@@ -23,11 +23,14 @@ import com.joelgtsantos.consumeremailservice.domain.Email;
 @Service
 public class EmailServiceImpl implements EmailService {
   
-	private Logger logger = LoggerFactory.getLogger(EmailServiceImpl.class);
+	private Logger log = LoggerFactory.getLogger(EmailServiceImpl.class);
 	
     private final JavaMailSender emailSender;
     private final ContentBuilderService contentBuilderService;
     
+    /*
+     * Constructor
+    */
     public EmailServiceImpl(JavaMailSender emailSender, ContentBuilderService contentBuilderService) {
     	this.emailSender = emailSender;
     	this.contentBuilderService = contentBuilderService;
@@ -50,7 +53,7 @@ public class EmailServiceImpl implements EmailService {
 	        emailSender.send(messagePreparator);
 	        
     	} catch (MessagingException e) {
-    		logger.error("Error occurred sending email", e);
+    		log.error("Error occurred sending email", e);
         }
     }
 }
