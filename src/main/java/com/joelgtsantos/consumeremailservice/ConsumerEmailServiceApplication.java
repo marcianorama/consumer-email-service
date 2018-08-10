@@ -24,7 +24,7 @@ public class ConsumerEmailServiceApplication implements ApplicationRunner {
 	
 	@Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
-        log.info("Spring Mail - Sending Simple Email with JavaMailSender Example");
+        log.info("Spring Mail - Sending Email with JavaMailSender");
         
         //EmailService.send
         //"Sending Simple Email with JavaMailSender Example");
