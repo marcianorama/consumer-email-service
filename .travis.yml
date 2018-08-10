@@ -13,6 +13,9 @@ language: java
 jdk:
   - oraclejdk8
 
+install: 
+  travis_wait mvn install
+  
 script:
 - echo docker --version
 - mvn package
@@ -22,6 +25,6 @@ after_success:
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
 - BRANCH=${TRAVIS_BRANCH//[^[:alnum:]]/}
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo ${BRANCH,,}; fi`
-- export IMAGE_NAME=joelgtsantos/cosumeremailservice
+- export IMAGE_NAME=joelgtsantos/consumeremailservice
 - docker tag $IMAGE_NAME:"latest" $IMAGE_NAME:$TAG
 - docker push $IMAGE_NAME
