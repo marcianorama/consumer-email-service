@@ -6,8 +6,8 @@ spring:
   mail:
     default-encoding: UTF-8
     host: smtp.gmail.com
-    username: alekspunx@gmail.com
-    password: patin777
+    username: 
+    password: 
     port: 587
     properties:
       mail:
@@ -22,8 +22,8 @@ spring:
   rabbitmq:
     host: 192.168.187.134
     port: 5672
-    username: joel
-    password: joel1
+    username: 
+    password: 
     connection-timeout: 1
     listener:
       simple:
