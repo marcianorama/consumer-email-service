@@ -1,5 +1,5 @@
 # Consumer Email Service
-[![Build Status](https://travis-ci.org/joelgtsantos/cms-users-admin.svg?branch=master)](https://travis-ci.org/joelgtsantos/cms-users-admin)
+[![Build Status](https://travis-ci.org/joelgtsantos/consumer-email-service.svg?branch=master)](https://travis-ci.org/joelgtsantos/consumer-email-service)
 
 
 This application is an Email Service that consumes requests from a RabbitMQ server and sends mails according with the properties in each message, this properties must be in JSON Format.
